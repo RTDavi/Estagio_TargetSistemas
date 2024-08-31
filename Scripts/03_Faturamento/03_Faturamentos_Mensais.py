@@ -19,7 +19,6 @@ menor_faturamento = 0
 maior_faturamento = 0
 media_faturamento = 0
 quantidade_dias = 0
-valores_no_mes = []
 
 
 with open(LOCAL_ARQUIVO, "r") as arquivo:
@@ -31,11 +30,15 @@ with open(LOCAL_ARQUIVO, "r") as arquivo:
             quantidade_dias += 1
 
     valores_no_mes = [dado["Valor"] for dado in dados if dado["Valor"] > 0]
-    print(valores_no_mes)
-menor_faturamento = min(valores_no_mes)
-maior_faturamento = max(valores_no_mes)
-media_faturamento = media_faturamento / quantidade_dias
+    media_faturamento = media_faturamento / quantidade_dias
+
+    dias_media_superior = [
+        dado["Dia"] for dado in dados if dado["Valor"] > media_faturamento
+    ]
+    menor_faturamento = min(valores_no_mes)
+    maior_faturamento = max(valores_no_mes)
 
 print(f"O MAIOR FATURAMENTO DO MÊS FOI DE: {maior_faturamento}")
 print(f"O MENOR FATURAMENTO DO MÊS FOI DE: {menor_faturamento}")
-print(f"A MÉDIA DE FATURAMENTO DO MÊS FOI DE: {media_faturamento}")
+print(f"O FATURAMENTO MENSAL FOI DE: {media_faturamento}")
+print(f"OS DIAS EM QUE O FATURAMENTO FOI ACIMA DA MÉDIA MENSAL: {dias_media_superior}")
