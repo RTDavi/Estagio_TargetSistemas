@@ -25,15 +25,15 @@ with open(LOCAL_ARQUIVO, "r") as arquivo:
     dados = json.load(arquivo)
 
     for dado in dados:
-        media_faturamento += dado["Valor"]
-        if dado["Valor"] > 0:
+        media_faturamento += dado["valor"]
+        if dado["valor"] > 0:
             quantidade_dias += 1
 
-    valores_no_mes = [dado["Valor"] for dado in dados if dado["Valor"] > 0]
+    valores_no_mes = [dado["valor"] for dado in dados if dado["valor"] > 0]
     media_faturamento = media_faturamento / quantidade_dias
 
     dias_media_superior = [
-        dado["Dia"] for dado in dados if dado["Valor"] > media_faturamento
+        dado["dia"] for dado in dados if dado["valor"] > media_faturamento
     ]
     menor_faturamento = min(valores_no_mes)
     maior_faturamento = max(valores_no_mes)
